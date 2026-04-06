@@ -52,7 +52,7 @@ public class CouponRepositoryImpl implements CouponRepository {
     @Override
     public Optional<Coupon> findByCodeAndStatusNot(CouponCode couponCode, CouponStatus status) {
         return jpaRepository
-                .findByCodeAndStatus(couponCode.getCode(), status)
+                .findByCodeAndStatusNot(couponCode.getCode(), status)
                 .map(mapper::toDomain);
     }
 }

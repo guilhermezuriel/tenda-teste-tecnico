@@ -13,7 +13,7 @@ public interface CouponJpaRepository extends JpaRepository<CouponJpaEntity, Stri
 
     Optional<CouponJpaEntity> findByCode(String code);
 
-    Optional<CouponJpaEntity> findByCodeAndStatus(String code, CouponStatus status);
+    Optional<CouponJpaEntity> findByCodeAndStatusNot(String code, CouponStatus status);
 
     Optional<CouponJpaEntity> findByIdAndStatusNot(String id, CouponStatus status);
 }
