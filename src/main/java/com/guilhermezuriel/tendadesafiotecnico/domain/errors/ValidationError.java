@@ -1,6 +1,6 @@
-package com.guilhermezuriel.tendadesafiotecnico._shared.errors;
+package com.guilhermezuriel.tendadesafiotecnico.domain.errors;
 
-public class ValidationError implements DomainError{
+public class ValidationError implements DomainError {
 
     private final String message;
     private final String field;
