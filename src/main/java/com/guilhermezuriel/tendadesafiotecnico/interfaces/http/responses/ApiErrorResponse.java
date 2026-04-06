@@ -6,14 +6,18 @@ import com.guilhermezuriel.tendadesafiotecnico.application.errors.InvalidCouponE
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 
+import java.util.List;
+
 public class ApiErrorResponse {
 
     private final String code;
     private final String message;
+    private final List<FieldError> errors;
 
     private ApiErrorResponse(Builder builder) {
         this.code = builder.code;
         this.message = builder.message;
+        this.errors = builder.errors;
     }
 
     public String getCode() {
@@ -22,6 +26,10 @@ public class ApiErrorResponse {
 
     public String getMessage() {
         return message;
+    }
+
+    public List<FieldError> getErrors() {
+        return errors;
     }
 
     public static Builder builder() {
@@ -48,9 +56,12 @@ public class ApiErrorResponse {
         };
     }
 
+    public record FieldError(String field, String message) {}
+
     public static class Builder {
         private String code;
         private String message;
+        private List<FieldError> errors;
 
         public Builder code(String code) {
             this.code = code;
@@ -59,6 +70,11 @@ public class ApiErrorResponse {
 
         public Builder message(String message) {
             this.message = message;
+            return this;
+        }
+
+        public Builder errors(List<FieldError> errors) {
+            this.errors = errors;
             return this;
         }
 
