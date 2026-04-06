@@ -26,4 +26,8 @@ public class DateRange {
     public LocalDateTime getExpirationDate() {
         return expirationDate;
     }
+
+    public static DateRange reconstitute(LocalDateTime value) {
+        return new DateRange(value);
+    }
 }

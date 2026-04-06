@@ -28,4 +28,8 @@ public class DiscountAmount {
     public BigDecimal getAmount() {
         return amount;
     }
+
+    public static DiscountAmount reconstitute(BigDecimal value) {
+        return new DiscountAmount(value);
+    }
 }

@@ -27,4 +27,8 @@ public class CouponCode {
         return code;
     }
 
+    public static CouponCode reconstitute(String code) {
+        return new CouponCode(code);
+    }
+
 }
