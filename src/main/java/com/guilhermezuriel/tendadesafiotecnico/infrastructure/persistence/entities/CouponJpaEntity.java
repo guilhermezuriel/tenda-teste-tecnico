@@ -24,7 +24,7 @@ public class CouponJpaEntity {
     @Column( length = 6, nullable = false)
     private String code;
 
-    @Column(nullable = false)
+    @Column(nullable = false, columnDefinition = "TEXT")
     private String description;
 
     @Column(name = "discount_value", nullable = false)
@@ -46,6 +46,4 @@ public class CouponJpaEntity {
     @Column(name = "created_at", nullable = false)
     private LocalDateTime createdAt;
 
-    @Column(name = "deleted_at")
-    private LocalDateTime deletedAt;
 }
