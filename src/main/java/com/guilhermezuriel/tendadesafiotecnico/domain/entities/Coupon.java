@@ -1,6 +1,8 @@
 package com.guilhermezuriel.tendadesafiotecnico.domain.entities;
 
 import com.guilhermezuriel.tendadesafiotecnico.domain.entities.enums.CouponStatus;
+import com.guilhermezuriel.tendadesafiotecnico.domain.errors.BusinessRuleError;
+import com.guilhermezuriel.tendadesafiotecnico.domain.errors.DomainError;
 import com.guilhermezuriel.tendadesafiotecnico.domain.errors.ValidationError;
 import com.guilhermezuriel.tendadesafiotecnico._shared.result.Result;
 import com.guilhermezuriel.tendadesafiotecnico.application.usecases.createcoupon.CreateCouponInput;
@@ -9,6 +11,7 @@ import com.guilhermezuriel.tendadesafiotecnico.domain.entities.valueObjects.Date
 import com.guilhermezuriel.tendadesafiotecnico.domain.entities.valueObjects.DiscountAmount;
 import lombok.Getter;
 
+import java.time.LocalDateTime;
 import java.util.UUID;
 
 @Getter
@@ -19,7 +22,7 @@ public class Coupon {
     private final String description;
     private final DiscountAmount discountValue;
     private final DateRange expirationDate;
-    private final CouponStatus status;
+    private CouponStatus status;
     private final boolean published;
     private final boolean redeemed;
 
@@ -73,6 +76,30 @@ public class Coupon {
                 input.published(),
                 false
         ));
+    }
+
+    public static Coupon reconstitute(
+            String id,
+            CouponCode code,
+            String description,
+            DiscountAmount discountValue,
+            DateRange expirationDate,
+            CouponStatus status,
+            boolean published,
+            boolean redeemed
+    ) {
+        return new Coupon(id, code, description, discountValue, expirationDate, status, published, redeemed);
+    }
+
+    public Result<Void, DomainError> markAsDeleted() {
+        if (this.status == CouponStatus.DELETED) {
+            return Result.fail(new BusinessRuleError(
+                    "Cupom já foi deletado",
+                    "COUPON_ALREADY_DELETED"
+            ));
+        }
+        this.status = CouponStatus.DELETED;
+        return Result.ok(null);
     }
 
 
