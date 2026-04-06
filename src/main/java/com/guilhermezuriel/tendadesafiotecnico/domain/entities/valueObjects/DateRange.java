@@ -1,6 +1,6 @@
 package com.guilhermezuriel.tendadesafiotecnico.domain.entities.valueObjects;
 
-import com.guilhermezuriel.tendadesafiotecnico._shared.errors.ValidationError;
+import com.guilhermezuriel.tendadesafiotecnico.domain.errors.ValidationError;
 import com.guilhermezuriel.tendadesafiotecnico._shared.result.Result;
 
 import java.time.LocalDateTime;
